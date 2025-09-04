@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Salem Coven//Pre-venda Reminder//EN
+BEGIN:VEVENT
+UID:pre-venda-salem-coven-20250927@example.com
+DTSTAMP:20250904T120000Z
+DTSTART:20250927T130000Z
+DTEND:20250927T140000Z
+SUMMARY:Pré-Venda - Salém Coven
+DESCRIPTION:As vendas começaram! Garanta seu ingresso com desconto na pré-venda.
+LOCATION:Condomínio Reserva dos Pássaros, Salvador - BA
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
