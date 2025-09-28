@@ -19,7 +19,7 @@ export default async function ProtectedPage() {
   const claimedTickets = tickets.data?.filter(ticket => ticket.name) || []
 
   return (
-    <div className="max-w-xl m-auto py-8 px-4 text-white grid gap-10">
+    <div className="max-w-xl w-full m-auto py-8 px-4 text-white grid gap-10">
       <div className="flex items-center gap-4">
         <Link href="/protected"><ArrowLeft /></Link>
         <h1 className="text-2xl font-bold">Admin Panel</h1>

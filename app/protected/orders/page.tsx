@@ -41,7 +41,7 @@ export default async function ProtectedPage() {
           <h2 className="text-xl font-bold">Orders</h2>
           <p>{orders.data?.length} pedido{orders.data?.length != 1 && 's'}</p>
         </div>
-        <div className="grid grid-cols-[1fr_3fr_2fr] gap-4">
+        <div className="grid grid-cols-[1fr_3fr_1fr] gap-4">
           {orders.data?.map((order) => (
             <Fragment key={order.id}>
               <p className="h-full flex items-center">{order.paid ? toBRL(order.paid) : toBRL(order.amount * getTicketPrice(batch))}</p>

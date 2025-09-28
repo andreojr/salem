@@ -17,6 +17,6 @@ export function ConfirmPayment({ order, batch }: { order: Order, batch: number})
     }
 
     return (
-        <Button onClick={handleConfirmPayment}>Confirmar pagamento</Button>
+        <Button onClick={handleConfirmPayment} className="text-sm">Confirmar</Button>
     )
 }

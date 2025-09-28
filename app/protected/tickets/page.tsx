@@ -33,12 +33,15 @@ export default async function ProtectedPage() {
           <h2 className="text-xl font-bold">Tickets</h2>
           <p>{filteredTickets.length} ingresso{filteredTickets.length != 1 && 's'}</p>
         </div>
-        <div className="grid grid-cols-[1fr_2fr_3fr] gap-4">
+        <div className="grid grid-cols-[1fr_3fr_3fr] gap-4">
+          <p>Lote</p>
+          <p>Nome</p>
+          <p>E-mail</p>
           {filteredTickets.map((ticket) => (
             <Fragment key={ticket.id}>
-              <p className="h-full flex items-center">{ticket.order.batch > 0 ? `${ticket.order.batch}º lote` : "Pré-venda"}</p>
+              <p className="h-full flex items-center">{ticket.order.batch}</p>
               {ticket.name !== null && <div className="h-full">{ticket.name}</div>}
-              {ticket.name === null && <div className="h-full"><span className="text-red-400">Não reinvidicado</span></div>}
+              {ticket.name === null && <div className="h-full"><span className="text-yellow-400">Pendente</span></div>}
               <p className="h-full flex items-center font-medium w-full overflow-hidden">{ticket.email}</p>
               <Separator className="col-span-3 bg-[#663666]" />
             </Fragment>
