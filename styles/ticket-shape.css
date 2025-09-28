@@ -1,0 +1,41 @@
+.ticket-shape {
+    /* Cor e bordas arredondadas */
+    background-color: #C4B9B7;
+    border-radius: 1.5rem;
+    
+    /* Configuração para as 'perfuradas' */
+    position: relative;
+    overflow: hidden;
+}
+
+/* Pseudo-elemento para a perfuração do lado esquerdo */
+.ticket-shape::before {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -15px;
+    
+    /* O 'círculo' perfurado */
+    background-image: radial-gradient(circle, #3C243A 50%, transparent 50%);
+    background-size: 30px 30px;
+    z-index: 1;
+}
+
+/* Pseudo-elemento para a perfuração do lado direito */
+.ticket-shape::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    right: -15px;
+
+    /* O 'círculo' perfurado */
+    background-image: radial-gradient(circle, #3C243A 50%, transparent 50%);
+    background-size: 30px 30px;
+    z-index: 1;
+}

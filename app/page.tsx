@@ -1,16 +1,29 @@
 import { Address } from "@/components/address";
+import { LogoutButton } from "@/components/logout-button";
 import { Playlist } from "@/components/playlist";
-import { Calendar, Clock, ExternalLink } from "lucide-react";
+import { Ticket } from "@/components/ticket";
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/lib/supabase/server";
+import { adminEmails } from "@/lib/utils";
+import { ArrowUpRight, Calendar, Clock, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
-export default function Home() {
+export default async function Home() {
+  const supabase = await createClient()
+  const { data } = await supabase.auth.getClaims()
+  const claims = data?.claims
+  const isTicketSaleOpen = Number(process.env.NEXT_PUBLIC_IS_TICKET_SALE_OPEN)
+
   return (
-    <main className="max-w-xl m-auto p-4 text-white grid gap-10">
+    <main className="max-w-xl m-auto py-8 px-4 text-white grid gap-10">
+      {adminEmails.includes(claims?.email) && <Link href="/protected"><Button className="w-full">Admin Panel</Button></Link>}
       {/* Apresentação */}
       <section className="grid gap-10">
         <div className=" bg-red-500 rounded-3xl h-[20rem] bg-cover bg-no-repeat bg-center" style={{ backgroundImage: 'url("./salem.png")' }} />
         <div className="text-center grid gap-2 m-auto">
           <p className="font-bold text-xl">O coven de Salém convoca você.</p>
           <p className="text-base">Venha brindar com porções mágicas, remexer o esqueleto e celebrar a noite das bruxas.</p>
+          <p><a href="https://instagram.com/salemthecoven" target="_blank"><Button variant="link">Para mais informações, siga-nos no instagram<ArrowUpRight className="-ml-1" /></Button></a></p>
         </div>
       </section>
 
@@ -48,14 +61,39 @@ export default function Home() {
       <section className="grid gap-10">
         <div className="text-center grid gap-2 m-auto">
           <p className="font-bold text-xl">Como adquirir seu ingresso?</p>
-          <p>Em breve! As vendas começam em <strong>01/10</strong>.</p>
+          {
+            !isTicketSaleOpen ? (
+              <>
+                <p>Em breve! As vendas começam em <strong>01/10</strong>.</p>
+              </>
+            ) : (
+              <>
+                <p>
+                  Faça o login com sua conta Google, escolha a quantidade de ingressos, informe o email de cada convidado e confirme sua compra.
+                </p>
+                <p className="text-[#C4B9B7] mt-4 text-sm">
+                  Você irá receber o código PIX para efetuar o pagamento no seu banco favorito. Assim que confirmado, seu lugar estará garantido!
+                </p>
+              </>
+            )
+          }
         </div>
         <div className="bg-[#3C243A] p-4 rounded-3xl flex flex-col gap-4 text-center">
-          <p className="text-sm">Adicione um lembrete e pague mais barato comprando na pré-venda.</p>
-          <a target="_blank" className="bg-[#C4B9B7] rounded-2xl p-2 text-[#3C243A] text-center grid gap-2" href="lembrete.ics">
-            {/* Anúncio pré-venda 27/09 */}
-            <p>Adicionar Lembrete</p>
-          </a>
+          {
+            !isTicketSaleOpen ? (
+              <>
+                <p className="text-sm">Adicione um lembrete e pague mais barato comprando na pré-venda.</p>
+                <a target="_blank" className="bg-[#C4B9B7] rounded-2xl p-2 text-[#3C243A] text-center grid gap-2" href="lembrete.ics">
+                  {/* Anúncio pré-venda 27/09 */}
+                  <p>Adicionar Lembrete</p>
+                </a>
+              </>
+            ) :
+            <div>
+              <Ticket />
+              {claims && <LogoutButton />}
+            </div>
+          }
         </div>
       </section>
 
