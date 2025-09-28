@@ -20,7 +20,7 @@ export default async function ProtectedPage() {
         <Link href="/"><ArrowLeft /></Link>
         <h1 className="text-2xl font-bold">Admin Panel</h1>
       </div>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-2">
         <Link href="/protected/orders"><Button>Pedidos</Button></Link>
         <Link href="/protected/tickets"><Button>Ingressos</Button></Link>
         <Link href="/protected/guests"><Button>Lista de Convidados</Button></Link>

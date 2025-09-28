@@ -68,9 +68,9 @@ export function Cart({ email, payment_amount, batch }: { email: string, payment_
                     {tickets.map((e, i) => (
                         <div key={i} className="ticket-shape flex py-4 px-8 text-[#160D18] justify-between">
                             <div className="text-left">
-                                <p className="font-bold text-xl">Coven Pass ({batch > 0 ? `${batch}º lote` : "Pré-venda"})</p>
+                                <p className="font-bold text-lg">Coven Pass ({batch > 0 ? `${batch}º lote` : "Pré-venda"})</p>
                                 {e != email && (
-                                    <div>
+                                    <div className="text-sm">
                                         <input
                                             placeholder="Informe o e-mail"
                                             className="bg-transparent border-b border-[#160D18] placeholder:text-[#160D1866] outline-none w-40"
@@ -80,7 +80,7 @@ export function Cart({ email, payment_amount, batch }: { email: string, payment_
                                         <span>@gmail.com</span>
                                     </div>
                                 )}
-                                {e == email && <p className="text-base">{e}</p>}
+                                {e == email && <p className="text-sm">{e}</p>}
                             </div>
                             <div className="flex flex-col justify-between">
                                 <p>{getTicketPrice(batch).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</p>
