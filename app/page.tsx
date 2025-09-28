@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <main className="max-w-xl py-8 px-4 text-white flex flex-col justify-center items-center gap-10 w-full">
-      {adminEmails.includes(claims?.email) && <Link href="/protected"><Button className="w-full">Admin Panel</Button></Link>}
+      {adminEmails.includes(claims?.email) && <Link href="/protected" className="w-full"><Button className="w-full">Admin Panel</Button></Link>}
       {/* Apresentação */}
       <section className="grid gap-10">
         <div className=" bg-red-500 rounded-3xl h-[20rem] bg-cover bg-no-repeat bg-center" style={{ backgroundImage: 'url("./salem.png")' }} />

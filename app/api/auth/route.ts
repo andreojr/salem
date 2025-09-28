@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/server'
 import { NextResponse } from 'next/server'
 
 export async function GET(request: Request) {
-  const { searchParams, origin } = new URL(request.url)
+  const { searchParams } = new URL(request.url)
   const code = searchParams.get('code')
   let next = searchParams.get('next') ?? '/'
   if (!next.startsWith('/')) {
@@ -12,20 +12,19 @@ export async function GET(request: Request) {
   if (code) {
     const supabase = await createClient()
     const { error, data } = await supabase.auth.exchangeCodeForSession(code)
-    if (!error && data.user && data.user.id && data.user.email) {
+    if (!error && data.user?.id && data.user?.email) {
       const forwardedHost = request.headers.get('x-forwarded-host')
-      const isLocalEnv = process.env.NODE_ENV === 'development'
-      if (isLocalEnv) {
-        return NextResponse.redirect(`${origin}${next}`)
-      } else if (forwardedHost) {
-        return NextResponse.redirect(`https://${forwardedHost}${next}`)
-      } else {
-        return NextResponse.redirect(`${origin}${next}`)
-      }
+      const protocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+      const host = forwardedHost || request.headers.get('host') || 'localhost'
+      const redirectUrl = `${protocol}://${host}${next}`
+
+      return NextResponse.redirect(redirectUrl)
     } else {
       await supabase.auth.signOut()
     }
   }
 
-  return NextResponse.redirect(`${origin}/auth/error`)
+  const fallbackHost = request.headers.get('x-forwarded-host') || request.headers.get('host') || 'localhost'
+  const fallbackProtocol = process.env.NODE_ENV === 'development' ? 'http' : 'https'
+  return NextResponse.redirect(`${fallbackProtocol}://${fallbackHost}/auth/error`)
 }
