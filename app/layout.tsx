@@ -25,7 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body className={`${poppins.className} antialiased bg-[#160D18]`}>
+      <body className={`${poppins.className} antialiased bg-[#160D18] flex items-center justify-center`}>
         {children}
       </body>
     </html>

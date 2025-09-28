@@ -15,12 +15,12 @@ export default async function Home() {
   const isTicketSaleOpen = Number(process.env.NEXT_PUBLIC_IS_TICKET_SALE_OPEN)
 
   return (
-    <main className="max-w-xl m-auto py-8 px-4 text-white grid gap-10">
+    <main className="max-w-xl py-8 px-4 text-white flex flex-col justify-center items-center gap-10 w-full">
       {adminEmails.includes(claims?.email) && <Link href="/protected"><Button className="w-full">Admin Panel</Button></Link>}
       {/* Apresentação */}
       <section className="grid gap-10">
         <div className=" bg-red-500 rounded-3xl h-[20rem] bg-cover bg-no-repeat bg-center" style={{ backgroundImage: 'url("./salem.png")' }} />
-        <div className="text-center grid gap-2 m-auto">
+        <div className="text-center grid gap-2">
           <p className="font-bold text-xl">O coven de Salém convoca você.</p>
           <p className="text-base">Venha brindar com porções mágicas, remexer o esqueleto e celebrar a noite das bruxas.</p>
           <p><a href="https://instagram.com/salemthecoven" target="_blank"><Button variant="link">Para mais informações, siga-nos no instagram<ArrowUpRight className="-ml-1" /></Button></a></p>
@@ -28,7 +28,7 @@ export default async function Home() {
       </section>
 
       {/* Quando e onde? */}
-      <section className="">
+      <section className="w-full">
         <div className="bg-[#3C243A] p-4 rounded-3xl grid gap-4">
           <div className="flex gap-4 text-[#3C243A]">
             <div className="bg-[#C4B9B7] rounded-2xl p-4 flex-1 flex gap-2 items-center justify-center">
@@ -36,7 +36,7 @@ export default async function Home() {
               <p>1 nov</p>
             </div>
             <div className="bg-[#C4B9B7] rounded-2xl p-4 flex-1 flex gap-2 items-center justify-center">
-              <Clock /> 
+              <Clock />
               <p>20:00</p>
             </div>
           </div>
@@ -47,7 +47,7 @@ export default async function Home() {
       </section>
 
       {/* Playlist */}
-      <section className="grid gap-10">
+      <section className="flex flex-col gap-10">
         <div className="text-center grid gap-2 m-auto">
           <p className="font-bold text-xl">Que tal dar uma de DJ?</p>
           <p className="text-base">Escolha o que será tocado na festa editando nossa playlist do Spotify!</p>
@@ -58,7 +58,7 @@ export default async function Home() {
       </section>
 
       {/* Compra de ingresso */}
-      <section className="grid gap-10">
+      <section className="flex flex-col gap-10">
         <div className="text-center grid gap-2 m-auto">
           <p className="font-bold text-xl">Como adquirir seu ingresso?</p>
           {
@@ -89,16 +89,16 @@ export default async function Home() {
                 </a>
               </>
             ) :
-            <div>
-              <Ticket />
-              {claims && <LogoutButton />}
-            </div>
+              <div>
+                <Ticket />
+                {claims && <LogoutButton />}
+              </div>
           }
         </div>
       </section>
 
       {/* Avisos importantes */}
-      <section className="text-center grid gap-8 m-auto">
+      <section className="text-center flex flex-col gap-8">
         <p className="font-bold text-xl">Avisos Importantes</p>
         <div>
           <p>🍺</p>
