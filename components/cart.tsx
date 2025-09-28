@@ -68,7 +68,7 @@ export function Cart({ email, payment_amount, batch }: { email: string, payment_
                     {tickets.map((e, i) => (
                         <div key={i} className="ticket-shape flex py-4 px-8 text-[#160D18] justify-between">
                             <div className="text-left">
-                                <p className="font-bold text-lg">Coven Pass ({batch > 0 ? `${batch}º lote` : "Pré-venda"})</p>
+                                <p className="font-bold text-base">Coven Pass ({batch > 0 ? `${batch}º lote` : "Pré-venda"})</p>
                                 {e != email && (
                                     <div className="text-sm">
                                         <input

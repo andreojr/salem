@@ -50,7 +50,7 @@ export function Checkout({ email, payment_amount, handleCancel }: { email: strin
                     </div>
 
                     {qrcode && <Image src={qrcode} alt="QrCode" width={256} height={256} />}
-                    <div className="flex items-center rounded-md bg-[#160D18] p-4 relative">
+                    <div className="flex items-center rounded-3xl bg-[#160D18] p-4 max-w-80 break-words overflow-hidden justify-center">
                         <span className="select-all text-sm font-mono text-[#C4B9B7]">{code}</span>
                     </div>
                     <Button onClick={handleCopy}>
