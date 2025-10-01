@@ -12,7 +12,7 @@ export function Checkout({ email, payment_amount, handleCancel }: { email: strin
 
     const message = `Olá, nativo de Salém. Acabo de realizar o ritual de pagamento. Segue o comprovante. Que o Coven me receba. Meu e-mail é: ${email}`;
     const encodedMessage = encodeURIComponent(message);
-    const whatsappLink = `https://wa.me/5571992634457?text=${encodedMessage}`;
+    const whatsappLink = `https://wa.me/5571999831504?text=${encodedMessage}`;
 
 
     function handleCopy() {
@@ -24,9 +24,9 @@ export function Checkout({ email, payment_amount, handleCancel }: { email: strin
     useEffect(() => {
         const qrCodePix = QrCodePix({
             version: '01',
-            key: '+5571992634457',
-            name: 'Andre Luiz de Oliveira J',
-            city: 'Sao Paulo',
+            key: '+5571999831504',
+            name: 'Kelly Aguiar de Cerqueira',
+            city: 'Salvador',
             message: 'O coven de Salem convoca voce!',
             value: pay,
         });

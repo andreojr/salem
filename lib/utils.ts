@@ -12,6 +12,8 @@ export const adminEmails = ['keeponlyandrew@gmail.com', 'kellguiar@gmail.com', '
 const amountOfTicketsPerBatch = [25, 20, 10, 5] // Total 60;
 const ticketBasePrice = Number(process.env.NEXT_PUBLIC_TICKET_BASE_PRICE)
 
+const preSaleEndDate = new Date('2025-10-01T03:00:00Z')
+
 export function getTotalEstimatedFunds() {
   let total = 0;
   amountOfTicketsPerBatch.forEach((amount, i) => {
@@ -32,15 +34,19 @@ export async function getAmountOfTicketsSold(supabase: SupabaseClient) {
 }
 
 export function getTicketPrice(batch: number) {
-  return Number((ticketBasePrice + batch * 5).toFixed(2))
+  const now = new Date()
+  const decreaser = now < preSaleEndDate ? 0 : 1
+  return Number((ticketBasePrice + (batch - decreaser) * 5).toFixed(2))
 }
 
 export function getCurrentBatch(amountOfTicketsSold: number) {
   let checkpoint = 0
+  const now = new Date()
+
   for (let i = 0; i < amountOfTicketsPerBatch.length; i++) {
     checkpoint += amountOfTicketsPerBatch[i];
     if (amountOfTicketsSold < checkpoint)
-      return i;
+      return now < preSaleEndDate ? i : i + 1;
   }
   return -1;
 }
