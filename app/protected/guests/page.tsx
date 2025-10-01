@@ -15,7 +15,7 @@ export default async function ProtectedPage() {
     redirect("/");
   }
 
-  const tickets = await supabase.from('tickets').select('*')
+  const tickets = await supabase.from('tickets').select('*').order('name', { ascending: true })
   const claimedTickets = tickets.data?.filter(ticket => ticket.name) || []
 
   return (
