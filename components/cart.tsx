@@ -76,6 +76,8 @@ export function Cart({ email, payment_amount, batch }: { email: string, payment_
                                             className="bg-transparent border-b border-[#160D18] placeholder:text-[#160D1866] outline-none w-40"
                                             value={e}
                                             onChange={(evt) => updateTicketEmail(i, evt.target.value.replace(/\s/g, '').toLowerCase())}
+                                            required
+                                            type="text"
                                         />
                                         <span>@gmail.com</span>
                                     </div>
