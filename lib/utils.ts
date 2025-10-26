@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export const adminEmails = ['keeponlyandrew@gmail.com', 'kellguiar@gmail.com', 'evelynefrodo@gmail.com', 'jtg.teixeira.83@gmail.com', 'higorleonardoll@gmail.com'];
 
 
-const amountOfTicketsPerBatch = [25, 20, 10, 5] // Total 60;
+const amountOfTicketsPerBatch = [25, 10, 25] // Total 60;
 const ticketBasePrice = Number(process.env.NEXT_PUBLIC_TICKET_BASE_PRICE)
 
 const preSaleEndDate = new Date('2025-10-01T03:00:00Z')
