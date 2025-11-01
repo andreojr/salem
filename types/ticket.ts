@@ -4,6 +4,8 @@ export type Ticket = {
     orderId: string
     order: Order
     name: string | null
+    checkin_done: boolean
+    voted_fantasy_id: string | null
 }
 
 export type Order = {

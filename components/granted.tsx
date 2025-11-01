@@ -1,6 +1,9 @@
 import { createClient } from "@/lib/supabase/server"
-import { Button } from "./ui/button"
 import { Ticket } from "@/types/ticket"
+import { Checkin } from "./checkin"
+import { Button } from "./ui/button"
+import { Vote } from "./vote"
+import { Fantasy } from "@/types/fantasy"
 
 export async function Granted({ ticket }: { ticket: Ticket }) {
     const supabase = await createClient()
@@ -13,6 +16,9 @@ export async function Granted({ ticket }: { ticket: Ticket }) {
         await supabase.from('tickets').update({ name }).eq('id', ticket.id)
     }
 
+    const { data } = await supabase.from('fantasies').select('id, description, fantasies_ticket_id_fkey(name)').neq('ticket_id', ticket.id)
+    const fantasies = (data || []) as unknown as Fantasy[]
+
     return (
         <div className="grid gap-4">
             <p className="text-2xl">Ingresso disponível</p>
@@ -24,10 +30,18 @@ export async function Granted({ ticket }: { ticket: Ticket }) {
                     </div>
                 </div>
                 <div className="border-t border-dashed border-[#160D18] bg-[#C4B9B7] text-[#160D18] p-4 rounded-b-3xl flex flex-col">
-                    <Button variant="link" className="text-[#160D18] text-lg">Fazer check-in</Button>
-                    <span className="text-[#160D1866] text-sm">Temporariamente desabilitado</span>
+                    {!ticket.checkin_done
+                        ? <Checkin ticket={ticket} />
+                        : <Button variant="link" className="text-[#160D18] text-lg" disabled>Check-in realizado!</Button>}
                 </div>
             </div>
+
+            {ticket.checkin_done && (
+                <div className="flex flex-col gap-2">
+                    <p>Concurso de fantasias</p>
+                    <Vote ticket={ticket} fantasies={fantasies} />
+                </div>
+            )}
         </div>
     )
 }

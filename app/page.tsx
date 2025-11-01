@@ -89,7 +89,7 @@ export default async function Home() {
                 </a>
               </>
             ) :
-              <div>
+              <div className="grid gap-4">
                 <Ticket />
                 {claims && <LogoutButton />}
               </div>

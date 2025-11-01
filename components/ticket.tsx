@@ -27,8 +27,9 @@ export async function Ticket() {
 
     const claims = data.claims
 
-    if (ticketFormatted && ticketFormatted.order && ticketFormatted.order.paid !== null && ticketFormatted.order.batch !== null)
+    if (ticketFormatted && ticketFormatted.order && ticketFormatted.order.paid !== null && ticketFormatted.order.batch !== null) {
         return <Granted ticket={ticketFormatted} />
+    }
 
     return (
         <Shopping email={claims.email} ticket={ticketFormatted} batch={getCurrentBatch(amountOfticketsSold)} />
