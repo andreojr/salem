@@ -63,7 +63,7 @@ export function Checkin({ ticket }: { ticket: Ticket }) {
         <div className="grid gap-4">
           <div className="flex items-center gap-3">
             <Label htmlFor="email-1">Participar do concurso de fantasias?</Label>
-            <Checkbox checked={fantasy} onCheckedChange={(checked) => setFantasy(typeof checked === "boolean" ? checked : false)} />
+            <Checkbox className="border-black border-2" checked={fantasy} onCheckedChange={(checked) => setFantasy(typeof checked === "boolean" ? checked : false)} />
           </div>
           <span className="italic text-sm">Prêmio: 2x ingressos grátis para a próxima edição + Caixa de bombom</span>
           {fantasy && (
