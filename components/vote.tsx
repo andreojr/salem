@@ -36,7 +36,7 @@ export function Vote({ ticket, fantasies }: { ticket: Ticket, fantasies: Fantasy
       <DialogTrigger asChild>
         <Button className="text-[#160D18] text-lg">Votar agora</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-[425px] max-h-[80vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Realize seu voto</DialogTitle>
           <DialogDescription>
